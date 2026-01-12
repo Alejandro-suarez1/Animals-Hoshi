@@ -68,6 +68,35 @@ nav {
   width: 100%;
 }
 
+/* Menú Hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, #04ffd3 0%, #265e8d 100%);
@@ -585,25 +614,55 @@ footer p {
 /* Tablets (max-width: 768px) */
 @media (max-width: 768px) {
   nav {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+    padding: 1rem 1.5rem;
   }
 
   .logo {
     width: 100px;
   }
 
+  /* Mostrar hamburguesa y ocultar menú normal */
+  .hamburger {
+    display: flex;
+  }
+
   .nav-links {
-    gap: 1rem;
-    font-size: 0.85rem;
-    justify-content: center;
-    text-align: center;
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 80px);
+    background: #0fa4a0;
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links a {
+    display: block;
+    font-size: 1.1rem;
+  }
+
+  .nav-links a::after {
+    display: none;
   }
 
   .hero {
     padding: 140px 1.5rem 80px;
-    margin-top: 120px;
+    margin-top: 80px;
   }
 
   .hero h1 {
@@ -685,8 +744,7 @@ footer p {
 /* Móviles grandes (max-width: 480px) */
 @media (max-width: 480px) {
   .nav-links {
-    flex-direction: column;
-    gap: 0.8rem;
+    width: 80%;
   }
 
   .hero {
@@ -801,6 +859,10 @@ footer p {
 @media (max-width: 360px) {
   .logo {
     width: 80px;
+  }
+
+  .nav-links {
+    width: 85%;
   }
 
   .hero h1 {
